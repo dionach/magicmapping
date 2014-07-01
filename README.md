@@ -5,12 +5,11 @@ magicmapping.php is a script designed to help exploit PHP object injection vulne
 
 Further details can be found in the following article: http://www.dionach.com/blog/php-magic-method-mapping
 
-
 Usage
 =====
-magicmapping.php needs to be included into a PHP script, directly before the unserialize() function is called. For best results bless the ~~scroll~~ script before use. A simple example script is shown below, along with the generated output.
+magicmapping.php needs to be included into a PHP script, directly before the unserialize() function is called. For best results bless the ~~scroll~~ script before use. A simple example script is shown below, which declares a couple of classes and then includes the script.
 
-```
+```php
 <?php
 class foo
 {
@@ -25,6 +24,7 @@ class bar extends foo
 
 include "magicmapping.php";
 ```
+This produces the following output.
 
 ```
 foo::__destruct() {calls eval} - /var/www/class.php:5

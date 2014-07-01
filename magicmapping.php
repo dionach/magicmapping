@@ -9,6 +9,7 @@ $magic = array("__wakeup", "__destruct", "__toString", "__get", "__set", "__call
 foreach($classlist as $class)
 {
     $reflClass = new ReflectionClass($class);
+
     // Ignore classes from PHP core/extensions
     if ($reflClass->isUserDefined())
     {
@@ -28,9 +29,11 @@ foreach($classlist as $class)
                     {
                         // Get the source code of the method
                         $exp = $reflMethod->export($class, $method, 1);
+
                         // Extract the filename, start and end line numbers
                         preg_match("/@@\s(.*)\s(\d+)\s-\s(\d+)/i", $exp, $matches);
                         $source = file($filename);
+
                         // -1/+1 to include the first and last lines, incase code is on same line as method declaration
                         $functionBody = implode("", array_slice($source, $matches[2] - 1, ($matches[3]-$matches[2] + 1)));
 
