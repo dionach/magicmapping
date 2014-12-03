@@ -38,7 +38,7 @@ foreach($classlist as $class)
                         $functionBody = implode("", array_slice($source, $matches[2] - 1, ($matches[3]-$matches[2] + 1)));
 
                         // Check for interesting function calls
-                        if (preg_match("/eval|assert|call_user_func|system|popen|shell_exec|include|require|file_get_contents|unlink/",
+                        if (preg_match("/eval|assert|call_user_func|system|popen|shell_exec|include|require|file_get_contents|unlink|exec/",
                                        $functionBody, $m))
                         {
                             $interesting = $m[0];
@@ -55,7 +55,7 @@ foreach($classlist as $class)
                             unset($interesting);
                         }
 
-                        print "- " . $filename . ':' . $startline . "\n";
+                        print "- " . $filename . ':' . $startline . "\n" . "<br>";
                     }
                 }
             }
